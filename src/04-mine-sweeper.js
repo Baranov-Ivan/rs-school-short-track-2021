@@ -21,8 +21,44 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+
+function checkNeighbors(matrix, indexI, indexJ) {
+  const rowLimit = matrix.length - 1;
+  const colLimit = matrix[0].length - 1;
+  let counter = 0;
+
+  for (
+    let i = Math.max(0, indexI - 1);
+    i <= Math.min(indexI + 1, rowLimit);
+    i++
+  ) {
+    for (
+      let j = Math.max(0, indexJ - 1);
+      j <= Math.min(indexJ + 1, colLimit);
+      j++
+    ) {
+      if (indexI !== i || indexJ !== j) {
+        if (matrix[i][j] === true) {
+          counter++;
+        }
+      }
+    }
+  }
+  return counter;
 }
 
+function minesweeper(matrix) {
+  const resArray = Array.from(
+    Array(matrix.length),
+    () => new Array(matrix.length),
+  );
+
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      resArray[i][j] = checkNeighbors(matrix, i, j);
+    }
+  }
+
+  return resArray;
+}
 module.exports = minesweeper;
