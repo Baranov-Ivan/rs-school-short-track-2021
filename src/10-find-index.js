@@ -16,13 +16,16 @@ function findIndex(array, value) {
   let left = 0;
   let right = len - 1;
   let mid;
-  while (true) {
+  const cond = true;
+  while (cond === true) {
     if (left > right) return -1;
     mid = Math.round(left + (right - left) / 2);
     if (array[mid] < value) left = mid + 1;
     if (array[mid] > value) right = mid - 1;
     if (array[mid] === value) return mid;
   }
+
+  return mid;
 }
 
 module.exports = findIndex;
